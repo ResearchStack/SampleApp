@@ -22,6 +22,7 @@ allprojects {
     repositories {
         jcenter()
         maven { url "https://jitpack.io" } // for MPAndroidChard, not on jcenter yet
+        mavenLocal()        // for updates to local rstack
     }
 }
 
