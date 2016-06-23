@@ -1,10 +1,7 @@
 package org.researchstack.sampleapp;
 import android.content.Context;
 
-import org.researchstack.backbone.answerformat.AnswerFormat;
-import org.researchstack.backbone.answerformat.ChoiceAnswerFormat;
 import org.researchstack.backbone.answerformat.BooleanAnswerFormat;
-import org.researchstack.backbone.model.Choice;
 import org.researchstack.backbone.result.StepResult;
 import org.researchstack.backbone.step.QuestionStep;
 import org.researchstack.backbone.step.FormStep;
@@ -18,8 +15,6 @@ import org.researchstack.skin.ui.fragment.ActivitiesFragment;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Iterator;
 
 public class SampleUiManager extends UiManager
 {
