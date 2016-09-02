@@ -1,4 +1,4 @@
-package org.researchstack.sampleapp.bridge.body;
+package org.sagebionetworks.bridge.sdk.rest.model;
 
 import org.researchstack.backbone.utils.FormatHelper;
 

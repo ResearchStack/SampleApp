@@ -1,4 +1,4 @@
-package org.researchstack.sampleapp.bridge;
+package org.sagebionetworks.bridge.sdk.rest.model;
 
 public class UploadSession
 {

@@ -1,4 +1,4 @@
-package org.researchstack.sampleapp.bridge;
+package org.sagebionetworks.bridge.researchstack.upload;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Base64;
@@ -8,6 +8,8 @@ import com.google.gson.Gson;
 import org.researchstack.backbone.ResourcePathManager;
 import org.researchstack.backbone.utils.FileUtils;
 import org.researchstack.backbone.utils.LogExt;
+import org.sagebionetworks.bridge.sdk.upload.FileInfo;
+import org.sagebionetworks.bridge.sdk.upload.Info;
 import org.spongycastle.cms.CMSAlgorithm;
 import org.spongycastle.cms.CMSEnvelopedData;
 import org.spongycastle.cms.CMSEnvelopedDataGenerator;
@@ -40,7 +42,7 @@ public class BridgeDataArchive
 {
     public static final String INFO_JSON_FILENAME = "info.json";
 
-    Info   info;
+    Info info;
     String filename;
     private ZipOutputStream outputStream;
     private File            tempFile;

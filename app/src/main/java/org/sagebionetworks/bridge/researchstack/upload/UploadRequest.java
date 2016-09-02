@@ -1,4 +1,4 @@
-package org.researchstack.sampleapp.bridge;
+package org.sagebionetworks.bridge.researchstack.upload;
 import co.touchlab.squeaky.field.DatabaseField;
 import co.touchlab.squeaky.table.DatabaseTable;
 

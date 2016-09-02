@@ -1,4 +1,4 @@
-package org.researchstack.sampleapp.bridge;
+package org.sagebionetworks.bridge.sdk.rest;
 import java.util.Map;
 
 public class UserSessionInfo

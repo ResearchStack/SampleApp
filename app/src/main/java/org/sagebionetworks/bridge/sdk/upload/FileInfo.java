@@ -1,4 +1,4 @@
-package org.researchstack.sampleapp.bridge;
+package org.sagebionetworks.bridge.sdk.upload;
 
 public class FileInfo
 {

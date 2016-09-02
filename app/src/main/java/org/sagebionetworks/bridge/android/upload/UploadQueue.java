@@ -1,4 +1,6 @@
-package org.researchstack.sampleapp.bridge;
+package org.sagebionetworks.bridge.android.upload;
+
+import org.sagebionetworks.bridge.researchstack.upload.UploadRequest;
 
 import java.util.List;
 

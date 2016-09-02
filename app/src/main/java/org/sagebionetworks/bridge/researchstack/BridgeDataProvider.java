@@ -1,4 +1,4 @@
-package org.researchstack.sampleapp.bridge;
+package org.sagebionetworks.bridge.researchstack;
 
 import android.content.Context;
 import android.content.Intent;
@@ -25,13 +25,15 @@ import org.researchstack.backbone.utils.FormatHelper;
 import org.researchstack.backbone.utils.LogExt;
 import org.researchstack.backbone.utils.ObservableUtils;
 import org.researchstack.sampleapp.BuildConfig;
-import org.researchstack.sampleapp.bridge.body.ConsentSignatureBody;
-import org.researchstack.sampleapp.bridge.body.EmailBody;
-import org.researchstack.sampleapp.bridge.body.SharingOptionBody;
-import org.researchstack.sampleapp.bridge.body.SignInBody;
-import org.researchstack.sampleapp.bridge.body.SignUpBody;
-import org.researchstack.sampleapp.bridge.body.SurveyAnswer;
-import org.researchstack.sampleapp.bridge.body.WithdrawalBody;
+import org.sagebionetworks.bridge.sdk.rest.UserSessionInfo;
+import org.sagebionetworks.bridge.sdk.rest.BridgeService;
+import org.sagebionetworks.bridge.sdk.rest.model.ConsentSignatureBody;
+import org.sagebionetworks.bridge.sdk.rest.model.EmailBody;
+import org.sagebionetworks.bridge.sdk.rest.model.SharingOptionBody;
+import org.sagebionetworks.bridge.sdk.rest.model.SignInBody;
+import org.sagebionetworks.bridge.sdk.rest.model.SignUpBody;
+import org.sagebionetworks.bridge.sdk.rest.model.SurveyAnswer;
+import org.sagebionetworks.bridge.sdk.rest.model.WithdrawalBody;
 import org.researchstack.skin.AppPrefs;
 import org.researchstack.skin.DataProvider;
 import org.researchstack.skin.DataResponse;
@@ -43,6 +45,13 @@ import org.researchstack.skin.notification.TaskAlertReceiver;
 import org.researchstack.skin.schedule.ScheduleHelper;
 import org.researchstack.skin.task.ConsentTask;
 import org.researchstack.skin.task.SmartSurveyTask;
+import org.sagebionetworks.bridge.researchstack.upload.BridgeDataArchive;
+import org.sagebionetworks.bridge.researchstack.upload.BridgeDataInput;
+import org.sagebionetworks.bridge.sdk.upload.Info;
+import org.sagebionetworks.bridge.android.upload.UploadQueue;
+import org.sagebionetworks.bridge.sdk.rest.model.UploadSession;
+import org.sagebionetworks.bridge.sdk.rest.model.UploadValidationStatus;
+import org.sagebionetworks.bridge.researchstack.upload.UploadRequest;
 
 import java.io.File;
 import java.io.IOException;
@@ -60,14 +69,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.GsonConverterFactory;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.RxJavaCallAdapterFactory;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.POST;
-import retrofit2.http.Path;
 import rx.Observable;
 import rx.schedulers.Schedulers;
 
@@ -81,7 +84,7 @@ public abstract class BridgeDataProvider extends DataProvider
     public static final String USER_SESSION_PATH           = "/user_session";
     public static final String USER_PATH                   = "/user";
 
-    private   BridgeService   service;
+    private BridgeService service;
     protected UserSessionInfo userSessionInfo;
     protected Gson    gson     = new Gson();
     protected boolean signedIn = false;
@@ -899,76 +902,6 @@ public abstract class BridgeDataProvider extends DataProvider
     public static File getFilesDir(Context context)
     {
         return new File(context.getFilesDir() + "/upload_request/");
-    }
-
-    public interface BridgeService
-    {
-
-        /**
-         * @return One of the following responses
-         * <ul>
-         * <li><b>201</b> returns message that user has been signed up</li>
-         * <li><b>473</b> error - returns message that study is full</li>
-         * </ul>
-         */
-        @Headers("Content-Type: application/json")
-        @POST("v3/auth/signUp")
-        Observable<BridgeMessageResponse> signUp(@Body SignUpBody body);
-
-        /**
-         * @return One of the following responses
-         * <ul>
-         * <li><b>200</b> returns UserSessionInfo Object</li>
-         * <li><b>404</b> error - "Credentials incorrect or missing"</li>
-         * <li><b>412</b> error - "User has not consented to research"</li>
-         * </ul>
-         */
-        @Headers("Content-Type: application/json")
-        @POST("v3/auth/signIn")
-        Observable<Response<UserSessionInfo>> signIn(@Body SignInBody body);
-
-        @Headers("Content-Type: application/json")
-        @POST("v3/subpopulations/{studyId}/consents/signature")
-        Observable<Response<BridgeMessageResponse>> consentSignature(@Path("studyId") String studyId, @Body ConsentSignatureBody body);
-
-        /**
-         * @return Response code <b>200</b> w/ message explaining instructions on how the user should
-         * proceed
-         */
-        @Headers("Content-Type: application/json")
-        @POST("v3/auth/requestResetPassword")
-        Observable<Response<BridgeMessageResponse>> requestResetPassword(@Body EmailBody body);
-
-
-        @POST("v3/subpopulations/{studyId}/consents/signature/withdraw")
-        Observable<Response<BridgeMessageResponse>> withdrawConsent(@Path("studyId") String studyId, @Body WithdrawalBody withdrawal);
-
-        /**
-         * @return Response code <b>200</b> w/ message explaining instructions on how the user should
-         * proceed
-         */
-        @Headers("Content-Type: application/json")
-        @POST("v3/auth/resendEmailVerification")
-        Observable<DataResponse> resendEmailVerification(@Body EmailBody body);
-
-        /**
-         * @return Response code 200 w/ message telling user has been signed out
-         */
-        @POST("v3/auth/signOut")
-        Observable<Response> signOut();
-
-        @POST("v3/users/self/dataSharing")
-        Observable<Response<BridgeMessageResponse>> dataSharing(@Body SharingOptionBody body);
-
-        @Headers("Content-Type: application/json")
-        @POST("v3/uploads")
-        Observable<Response<UploadSession>> requestUploadSession(@Body UploadRequest body);
-
-        @POST("v3/uploads/{id}/complete")
-        Observable<Response<BridgeMessageResponse>> uploadComplete(@Path("id") String id);
-
-        @GET("v3/uploadstatuses/{id}")
-        Observable<Response<UploadValidationStatus>> uploadStatus(@Path("id") String id);
     }
 
 }

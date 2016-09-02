@@ -1,4 +1,4 @@
-package org.researchstack.sampleapp.bridge;
+package org.sagebionetworks.bridge.sdk.rest.model;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

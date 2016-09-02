@@ -1,4 +1,4 @@
-package org.researchstack.sampleapp.bridge;
+package org.sagebionetworks.bridge.researchstack.upload;
 import android.content.Context;
 
 import com.google.gson.Gson;
