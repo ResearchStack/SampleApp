@@ -24,7 +24,8 @@ import org.researchstack.backbone.ui.step.layout.ConsentSignatureStepLayout;
 import org.researchstack.backbone.utils.FormatHelper;
 import org.researchstack.backbone.utils.LogExt;
 import org.researchstack.backbone.utils.ObservableUtils;
-import org.researchstack.sampleapp.BuildConfig;
+
+import org.sagebionetworks.bridge.android.BuildConfig;
 import org.sagebionetworks.bridge.sdk.rest.UserSessionInfo;
 import org.sagebionetworks.bridge.sdk.rest.BridgeService;
 import org.sagebionetworks.bridge.sdk.rest.model.ConsentSignatureBody;
