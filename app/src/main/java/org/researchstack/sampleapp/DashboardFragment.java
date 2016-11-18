@@ -147,7 +147,7 @@ public class DashboardFragment extends Fragment
         ArrayList<String> xVals = new ArrayList<>();
         for(int i = 0; i < 12; i++)
         {
-            xVals.add(i + "");
+            xVals.add(Integer.toString(i));
         }
 
         ArrayList<BarEntry> yVals1 = new ArrayList<>();
@@ -184,7 +184,7 @@ public class DashboardFragment extends Fragment
         ArrayList<String> xVals = new ArrayList<>();
         for(int i = 0; i < 12; i++)
         {
-            xVals.add(i + "");
+            xVals.add(Integer.toString(i));
         }
 
         ArrayList<BarEntry> yVals1 = new ArrayList<>();
@@ -217,7 +217,7 @@ public class DashboardFragment extends Fragment
         ArrayList<String> xValues = new ArrayList<>();
         for(int i = 0; i < 12; i++)
         {
-            xValues.add(i + "");
+            xValues.add(Integer.toString(i));
         }
 
         ArrayList<Entry> entries = new ArrayList<>();
